@@ -12,6 +12,7 @@ function App() {
 
  const [ciudad, setCiudad] = useState("");
 
+  const [error, setError] = useState(null);
 
  const [clima, setClima] = useState({
   ciudad: "",
@@ -25,9 +26,17 @@ function App() {
   e.preventDefault();
 
   try {
-    if(!ciudad.trim()) throw {message: "Coloca una Ciudad"};
+
+    setError(null);
+
+    if(!ciudad.trim()) {throw new Error ("Coloca una Ciudad");}
+    
 
     const respuesta = await fetch(`${API}${ciudad}`);
+
+    if(!respuesta.ok){
+      throw new Error("Error al obtener los datos del clima");
+    }
     const data = await respuesta.json();
 
     setClima({
@@ -39,39 +48,50 @@ function App() {
       condicionTexto: data.current.condition.text,
     });
   } catch (error) {
-      console.log(error.message)
+      setError(error.message);
+  } finally {
+    console.log('Conexión lograda')
   }
-}
+};
 
 
   return (
     <Container className="App">
       <h1>Clima</h1>
 
-      <Form onSubmit={onSubmit} >
-        <Form.Group className="mb-3" >
-        <FloatingLabel label="Ciudad">
-            <Form.Control id="ciudad" type="text" placeholder="Ciudad" required value={ciudad} onChange={(e) => setCiudad(e.target.value)} />
-        </FloatingLabel>
+      <Form onSubmit={onSubmit}>
+        <Form.Group className="mb-3">
+          <FloatingLabel label="Ciudad">
+            <Form.Control
+              id="ciudad"
+              type="text"
+              placeholder="Ciudad"
+              required
+              value={ciudad}
+              onChange={(e) => setCiudad(e.target.value)}
+            />
+          </FloatingLabel>
         </Form.Group>
-        
-      
-        <Button id="button" variant="primary" type="submit" >
+
+        <Button id="button" variant="primary" type="submit">
           Buscar
         </Button>
       </Form>
 
+
       {clima.ciudad && (
         <div>
-        <h2>{clima.ciudad}</h2>
-        <h3>{clima.pais}</h3>
-        <img src={clima.icon}></img>
-        <h4>{clima.temp}°C</h4>
-        <h5>{clima.condicionTexto}</h5>
+          <h2>{clima.ciudad}</h2>
+          <h3>{clima.pais}</h3>
+          <img src={clima.icon}></img>
+          <h4>{clima.temp}°C</h4>
+          <h5>{clima.condicionTexto}</h5>
         </div>
       )}
+      {error && <p className='error'>{error}</p>}
 
-          
+  
+      
     </Container>
   );
 }
