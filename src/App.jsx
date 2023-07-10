@@ -36,7 +36,7 @@ function App() {
 
 
     if(!respuesta.ok) {
-      throw new Error("Error al ontener los datos del clima")
+      throw new Error("Error al obtener los datos del clima")
     }
 
     setClima({
