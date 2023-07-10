@@ -88,7 +88,7 @@ function App() {
           <h5>{clima.condicionTexto}</h5>
         </div>
       )}
-      {error && <p className='error'>{error}</p>}
+      {error && <p>{error}</p>}
 
   
       
