@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 function App() {
 
-  const API = `http://api.weatherapi.com/v1/current.json?key=${import.meta.env.VITE_API_KEY}&lang=es&q=`
+  const API = `https://api.weatherapi.com/v1/current.json?key=${import.meta.env.VITE_API_KEY}&lang=es&q=`
 
  const [ciudad, setCiudad] = useState("");
 
@@ -49,7 +49,9 @@ function App() {
     });
   } catch (error) {
     setError(error.message || "Error al obtener los datos del clima");
+    return;
   }
+  setError(null);
 };
 
   return (
