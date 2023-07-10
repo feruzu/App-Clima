@@ -12,7 +12,7 @@ function App() {
 
  const [ciudad, setCiudad] = useState("");
 
-  const [error, setError] = useState(null);
+ const [error, setError] = useState(null);
 
  const [clima, setClima] = useState({
   ciudad: "",
@@ -30,29 +30,38 @@ function App() {
     setError(null);
 
     if(!ciudad.trim()) {throw new Error ("Coloca una Ciudad");}
-    
 
-    const respuesta = await fetch(`${API}${ciudad}`);
+    let data;
 
-    if(!respuesta.ok){
+    try {
+      const respuesta = await fetch(`${API}${ciudad}`);
+
+      if(!respuesta.ok){
+        throw new Error("Error al obtener los datos del clima");
+      }
+      
+      data = await respuesta.json();
+    }catch (error){
       throw new Error("Error al obtener los datos del clima");
     }
-    const data = await respuesta.json();
+  
+      setClima({
+        ciudad: data.location.name,
+        pais: data.location.country,
+        temp: data.current.temp_c,
+        condicion: data.current.condition.code,
+        icon: data.current.condition.icon,
+        condicionTexto: data.current.condition.text,
+      });
+    } catch (error) {
+        setError(error.message);
+    } finally {
+      console.log('Conexión lograda')
+    }
+    }
+    
 
-    setClima({
-      ciudad: data.location.name,
-      pais: data.location.country,
-      temp: data.current.temp_c,
-      condicion: data.current.condition.code,
-      icon: data.current.condition.icon,
-      condicionTexto: data.current.condition.text,
-    });
-  } catch (error) {
-      setError(error.message);
-  } finally {
-    console.log('Conexión lograda')
-  }
-};
+
 
 
   return (
