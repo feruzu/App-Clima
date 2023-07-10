@@ -48,7 +48,14 @@ function App() {
       condicionTexto: data.current.condition.text,
     });
   } catch (error) {
-    setError(error.message || "Error al obtener los datos del clima");
+    setError(error.message || "Error al obtener datos del clima");
+    setClima({
+      ciudad: '',
+      pais: '',
+      temp: '',
+      icon: '',
+      condicionTexto: '',
+    });
     return;
   }
   setError(null);
