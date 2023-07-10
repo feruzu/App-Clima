@@ -32,11 +32,12 @@ function App() {
   }
 
     const respuesta = await fetch(`${API}${ciudad}`);
+    const data = await respuesta.json();
+
+
     if(!respuesta.ok) {
       throw new Error("Error al ontener los datos del clima")
     }
-
-    const data = await respuesta.json();
 
     setClima({
       ciudad: data.location.name,
