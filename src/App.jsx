@@ -39,9 +39,7 @@ function App() {
       condicionTexto: data.current.condition.text,
     });
   } catch (error) {
-      console.log(error)
-  } finally {
-    console.log('Conexión lograda')
+      console.log(error.message)
   }
 }
 
