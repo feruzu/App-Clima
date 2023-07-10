@@ -78,6 +78,10 @@ input#ciudad.form-control {
             -moz-box-shadow: none;
             -webkit-box-shadow: none;
         }
+
+.error {
+     margin-top: 2rem;
+}
       
 
 /* Responsive */
