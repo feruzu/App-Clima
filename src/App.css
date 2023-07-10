@@ -1,7 +1,103 @@
 #root {
-  max-width: 500px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  font-family: 'Open Sans';
+  background: linear-gradient(145deg, #e6e6e6, #ffffff);
+box-shadow:  20px 20px 21px #d9d9d9,
+             -20px -20px 21px #ffffff;
+  border-radius: 20px;
+  width: 500px;
 }
 
+body {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+form {
+  margin-bottom: 2rem;
+}
+
+div h2, div h3 {
+  font-size: 30px;
+}
+
+img {
+  margin-top: 2rem;
+}
+
+div h5 {
+  margin-top: 2rem;
+  font-size: 19px;
+}
+
+button#button.btn.btn-primary {
+  margin-top: 1rem;
+  padding: 10px 20px;
+  border: none;
+}
+
+button#button.btn.btn-primary:hover, button#button.btn.btn-primary:active {
+  background: #292C35;
+}
+
+button#button.btn.btn-primary {
+  align-items: center;
+  background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+  border: 0;
+  border-radius: 8px;
+  box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+button#button.btn.btn-primary:active,
+button#button.btn.btn-primary:hover {
+  outline: 0;
+}
+
+
+
+input#ciudad.form-control {
+  border: none;
+}
+
+ input:focus, input.form-control:focus {
+            outline:none !important;
+            outline-width: 0 !important;
+            box-shadow: none;
+            -moz-box-shadow: none;
+            -webkit-box-shadow: none;
+        }
+      
+
+/* Responsive */
+
+@media (max-width: 600px ) { 
+     #root {
+      width: 370px;
+     }
+
+     div h2, div h3 {
+      font-size: 25px;
+    }
+}
+
+@media (max-width: 400px ) { 
+  #root {
+   width: 300px;
+  }
+
+  div h2, div h3 {
+    font-size: 19px;
+  }
+}
